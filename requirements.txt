@@ -1,0 +1,10 @@
+# Core dependencies for Uganda Tax Engine (Mini-Project 2)
+hypothesis>=6.167.0
+pytest>=9.0.0
+numpy>=2.0.0
+pandas>=3.0.0
+matplotlib>=3.10.0
+jupyter>=1.0.0
+nbconvert>=7.16.0
+ipykernel>=6.29.0
+
