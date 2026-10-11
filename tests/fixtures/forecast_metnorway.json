@@ -1,0 +1,110 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [32.7553, 0.3544, 1205]
+  },
+  "properties": {
+    "meta": {
+      "updated_at": "2026-10-11T11:00:00Z",
+      "units": {
+        "air_temperature": "celsius",
+        "precipitation_amount": "mm",
+        "wind_speed": "m/s"
+      }
+    },
+    "timeseries": [
+      {
+        "time": "2026-10-11T00:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 18.0,
+              "wind_speed": 2.5
+            }
+          },
+          "next_1_hours": {
+            "summary": { "symbol_code": "partlycloudy_day" },
+            "details": { "precipitation_amount": 0.0 }
+          }
+        }
+      },
+      {
+        "time": "2026-10-11T06:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 23.5,
+              "wind_speed": 3.8
+            }
+          },
+          "next_1_hours": {
+            "summary": { "symbol_code": "rainshowers_day" },
+            "details": { "precipitation_amount": 1.2 }
+          }
+        }
+      },
+      {
+        "time": "2026-10-11T12:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 27.0,
+              "wind_speed": 4.2
+            }
+          },
+          "next_1_hours": {
+            "summary": { "symbol_code": "heavyrainshowers_day" },
+            "details": { "precipitation_amount": 3.0 }
+          }
+        }
+      },
+      {
+        "time": "2026-10-11T18:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 20.2,
+              "wind_speed": 2.1
+            }
+          },
+          "next_1_hours": {
+            "summary": { "symbol_code": "clearsky_night" },
+            "details": { "precipitation_amount": 0.0 }
+          }
+        }
+      },
+      {
+        "time": "2026-10-12T06:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 21.0,
+              "wind_speed": 3.0
+            }
+          },
+          "next_1_hours": {
+            "summary": { "symbol_code": "rain" },
+            "details": { "precipitation_amount": 5.0 }
+          }
+        }
+      },
+      {
+        "time": "2026-10-12T12:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 26.2,
+              "wind_speed": 4.0
+            }
+          },
+          "next_1_hours": {
+            "summary": { "symbol_code": "rain" },
+            "details": { "precipitation_amount": 4.5 }
+          }
+        }
+      }
+    ]
+  }
+}
+
