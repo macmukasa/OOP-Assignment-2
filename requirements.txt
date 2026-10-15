@@ -1,10 +1,13 @@
-# Core dependencies for Uganda Tax Engine (Mini-Project 2)
+# Core dependencies for OOP Assignment 2 (Mini-Projects 1 & 2)
+# Mini-Project 1: Weather API Client & Visualizer
+# Mini-Project 2: Uganda Statutory Tax Engine
+
 hypothesis>=6.167.0
 pytest>=9.0.0
+requests>=2.31.0
 numpy>=2.0.0
 pandas>=3.0.0
 matplotlib>=3.10.0
 jupyter>=1.0.0
 nbconvert>=7.16.0
 ipykernel>=6.29.0
-

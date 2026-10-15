@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "id": 227653,
+      "name": "Mukono",
+      "latitude": 0.3544,
+      "longitude": 32.7553,
+      "elevation": 1205.0,
+      "feature_code": "PPLA",
+      "country_code": "UG",
+      "admin1_id": 227654,
+      "timezone": "Africa/Kampala",
+      "population": 161996,
+      "country_id": 226074,
+      "country": "Uganda",
+      "admin1": "Central Region"
+    },
+    {
+      "id": 227654,
+      "name": "Mukono District",
+      "latitude": 0.2833,
+      "longitude": 32.7833,
+      "elevation": 1150.0,
+      "feature_code": "ADM2",
+      "country_code": "UG",
+      "country": "Uganda",
+      "admin1": "Central Region"
+    }
+  ],
+  "generationtime_ms": 0.25
+}
+

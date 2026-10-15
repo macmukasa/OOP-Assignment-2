@@ -2,9 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
 # C extensions
-*.so
+*.obj
+*.o
 
 # Distribution / packaging
 .Python
@@ -43,8 +45,9 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+cover/
 
-# Jupyter Notebook checkpoints
+# Jupyter Notebook
 .ipynb_checkpoints
 
 # Environments
@@ -56,19 +59,9 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDE and Editor settings
+# IDE and OS
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-
-# Operating System files
 .DS_Store
 Thumbs.db
-Desktop.ini
-
-# Other files
-*.pdf
-
-
+desktop.ini
