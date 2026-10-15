@@ -1,13 +1,11 @@
 # OOP with Python - Assignment 2
-MSCS & MSDS OOP with Python, Advent 2026
-
 ---
 
 ## 1. Project overview
 
-This repository contains the completed solutions for Assignment 2 of the MSCS & MSDS Object-Oriented Programming (OOP) course. The assignment consists of two independent mini-projects:
+This repository contains the completed solutions for Assignment 2 of the Object-Oriented Programming (OOP) course. The assignment consists of two independent mini-projects:
 
-- **Mini-Project 1: Resilient Weather API Client and Forecast Engine (`weather_api_project.ipynb`)**  
+- **Mini-Project 1: Resilient Weather API Client and Forecast Engine (`project1_weather_api_project.ipynb`)**  
   An object-oriented forecasting library integrating Open-Meteo and MET Norway APIs. The package implements a resilient HTTP client with exponential backoff and retry policies, strict coordinate and payload validation, domain data models (`Location`, `DailyForecast`, `WeatherForecastReport`), and multi-panel Matplotlib visualizations.
 - **Mini-Project 2: Uganda Statutory Tax Engine (`project2_uganda_tax_engine.ipynb`)**  
   An object-oriented tax calculator implementing statutory rules administered by the Uganda Revenue Authority (URA). The engine covers monthly progressive Pay As You Earn (PAYE), Employee and Employer NSSF contributions, Local Service Tax (LST), Value Added Tax (VAT) with input/output reconciliation, Corporate Income Tax (CIT) with loss relief carryforwards, Withholding Tax (WHT), and Individual Rental Income Tax.
@@ -199,14 +197,14 @@ Composition replaces inheritance for `Money`, which encapsulates `decimal.Decima
 
 ## 8. Academic integrity and AI declaration
 
-This project was developed with assistance from the AI coding assistant Antigravity (Google DeepMind).
+This project was developed with assistance from the AI coding assistant Gemini.
 
 Assistance covered:
 - Drafting initial class structures and docstrings based on course specifications and URA statutory documentation.
 - Generating boundary test matrices and Hypothesis property strategies.
 - Writing Matplotlib visualization scripts with labeled axes and formatting.
 
-Engine calculations and object designs were checked against URA tax guides and verified using the automated test suite.
+Engine was checked against URA tax guides and verified using the automated test suite.
 
 ---
 
