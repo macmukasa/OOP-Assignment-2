@@ -6,6 +6,7 @@ dependencies:
   - python>=3.13
   - hypothesis
   - pytest
+  - requests
   - numpy
   - pandas
   - matplotlib
@@ -13,4 +14,3 @@ dependencies:
   - nbconvert
   - ipykernel
   - pip
-
