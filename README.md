@@ -1,140 +1,114 @@
-# Uganda Tax Engine (Mini-Project 2)
-**MSCS & MSDS OOP with Python — Assignment 2 (Advent 2026)**
+# Uganda tax engine (mini-project 2)
+MSCS & MSDS OOP with Python, Advent 2026
 
 ---
 
-## 1. Project Overview
+## 1. Project overview
 
-The **Uganda Tax Engine** is an extensible, mathematically sound, domain-driven software suite that models the statutory direct and indirect tax policies administered by the **Uganda Revenue Authority (URA)** and statutory authorities.
+The Uganda tax engine is an object-oriented tax calculator that implements the statutory tax rules administered by the Uganda Revenue Authority (URA).
 
-This implementation satisfies all mandatory core requirements and **Extension Task A (Withholding Tax and Rental Income Tax)**.
+The engine supports all core project specifications and Extension Task A (withholding tax and individual rental income tax).
 
-### Statutory Baselines & Regulatory Citations
-1. **Pay As You Earn (PAYE)**:
-   - *Uganda Income Tax Act (Cap 340), First Schedule, Part I (Resident Individuals) & Part II (Non-Resident Individuals)*.
-   - *Income Tax (Amendment) Act 2012*: Imposition of the 10% statutory surcharge on monthly employment income exceeding UGX 10,000,000.
-2. **National Social Security Fund (NSSF)**:
-   - *National Social Security Fund Act (Cap 222)*: Mandatory employee contribution of 5% and employer matching contribution of 10% on gross cash remuneration (Total 15%).
-3. **Local Service Tax (LST)**:
-   - *Local Governments (Amendment) Act 2008* & URA Practice Notes: Statutory municipal tax applied as an allowable pre-tax deduction against employment income before PAYE determination.
-4. **Value Added Tax (VAT)**:
-   - *Value Added Tax Act (Cap 349)*: Standard rate of 18% (Section 14), Zero-rated supplies (Section 24 & Third Schedule), and Exempt supplies (Section 19 & Second Schedule). Input tax apportionment and non-deductibility for exempt operations (Section 28).
-5. **Corporate Income Tax (CIT)**:
-   - *Uganda Income Tax Act (Cap 340)*: Standard 30% rate for resident corporate entities on net chargeable income (Gross Turnover less Section 22 allowable deductions and Section 38 loss carryforward relief).
-6. **Withholding Tax (WHT - Extension Task A)**:
-   - *Uganda Income Tax Act (Cap 340)*:
-     - **Section 119**: 6% WHT on commercial supply of goods/materials where transaction value exceeds UGX 1,000,000 (with exemption certificate handling).
-     - **Section 119A**: 15% flat WHT on professional, management, legal, and consultancy services.
-7. **Individual Rental Income Tax (Extension Task A)**:
-   - *Income Tax (Amendment) Act 2022/2023, Section 5(3)*: Flat 12% tax on gross rental income exceeding the statutory threshold of UGX 235,000 monthly (UGX 2,820,000 annually), with zero deductions for expenses or depreciation allowed for individuals.
+### Statutory baselines and regulatory citations
+- Pay As You Earn (PAYE): Income Tax Act, Cap 340, First Schedule. Resident monthly progressive rates apply: Nil up to UGX 335,000; 20% on excess over 335,000 up to 410,000; 25% on excess over 410,000 up to 485,000; 30% on excess over 485,000 up to 10,000,000. An additional 10% surcharge applies on income exceeding UGX 10,000,000 per the Income Tax (Amendment) Act 2012. Non-residents pay 10% on their initial UGX 335,000 before proceeding to the higher marginal brackets.
+- National Social Security Fund (NSSF): NSSF Act, Cap 222 mandates an employee deduction of 5% and an employer matching contribution of 10% on gross cash remuneration.
+- Local Service Tax (LST): Local Governments (Amendment) Act 2008 sets a statutory municipal deduction applied to employment income before PAYE determination.
+- Value Added Tax (VAT): Value Added Tax Act, Cap 349 sets an 18% standard rate. Zero-rated supplies incur 0% VAT while retaining input tax recovery rights. Exempt supplies incur no output VAT and disallow input tax deduction under Section 28.
+- Corporate Income Tax (CIT): Income Tax Act, Cap 340, Sections 22 and 38 set a 30% rate on resident corporate chargeable income, calculated as gross turnover less allowable deductions and assessed loss relief.
+- Withholding Tax (WHT): Section 119 sets a 6% deduction on commercial goods supplies above UGX 1,000,000. Section 119A sets a 15% deduction on professional and consultancy fees.
+- Individual Rental Income Tax: Section 5(3) of the Income Tax (Amendment) Act 2022/2023 sets a flat 12% rate on gross rent exceeding UGX 235,000 monthly (UGX 2,820,000 annually), with zero deductions allowed for individuals.
 
 ---
 
-## 2. Repository Structure
+## 2. Repository structure
 
 ```
 .
-├── project2_uganda_tax_engine.ipynb   # Main Jupyter Notebook (fully executable top-to-bottom)
+├── project2_uganda_tax_engine.ipynb   # Main Jupyter notebook (runs top-to-bottom)
 ├── README.md                          # Architecture, findings, setup, and AI declaration
-├── requirements.txt                   # Pip dependencies specification
+├── requirements.txt                   # Pip package dependencies
 ├── environment.yml                    # Conda environment specification (oop2)
 ├── pytest.ini                         # Pytest configuration
 ├── src/
 │   ├── __init__.py
 │   └── tax_engine/
 │       ├── __init__.py                # Package exports
-│       ├── money.py                   # Immutable Money Value Object in UGX (Decimal only)
-│       ├── exceptions.py              # Custom TaxError hierarchy
-│       ├── base.py                    # Abstract Tax base class, TaxContext, TaxResult
-│       ├── paye.py                    # Resident & Non-Resident progressive PAYE engine
-│       ├── payroll.py                 # Comprehensive payroll pipeline (NSSF, LST, Net Pay, CTC)
-│       ├── vat.py                     # VAT invoicing engine (Standard, Zero-rated, Exempt)
-│       ├── corporate.py               # Corporate income tax, deductions & loss relief
-│       └── extensions.py              # Extension Task A: Withholding Tax & Rental Tax
+│       ├── money.py                   # Immutable Money value object in UGX
+│       ├── exceptions.py              # TaxError exception hierarchy
+│       ├── base.py                    # Abstract Tax class, TaxContext, TaxResult
+│       ├── paye.py                    # Progressive PAYE engine
+│       ├── payroll.py                 # Payroll pipeline (NSSF, LST, net pay, CTC)
+│       ├── vat.py                     # VAT invoicing engine
+│       ├── corporate.py               # Corporate income tax, deductions, and loss relief
+│       └── extensions.py              # Extension task A: withholding tax and rental tax
 └── tests/
     ├── __init__.py
-    ├── test_money.py                  # Money immutability, operator overloading & float rejection
-    ├── test_paye_boundaries.py        # Boundary tests at every statutory edge (335k, 410k, 485k, 10M, 10M+1)
+    ├── test_money.py                  # Money immutability, operators, and float rejection
+    ├── test_paye_boundaries.py        # Boundary tests at every statutory edge
     ├── test_hypothesis_properties.py  # Property-based testing with Hypothesis
     ├── test_payroll.py                # Payroll pipeline and deduction ordering
-    ├── test_vat.py                    # VAT invoices reconciliation & refund testing
-    ├── test_corporate.py              # Corporate assessment & loss carryforwards
-    ├── test_extensions.py             # WHT threshold & individual rental tax tests
-    └── test_exceptions.py             # Custom exceptions and invalid input prevention
+    ├── test_vat.py                    # VAT invoices reconciliation and credit tests
+    ├── test_corporate.py              # Corporate assessment and loss carryforwards
+    ├── test_extensions.py             # WHT threshold and rental tax tests
+    └── test_exceptions.py             # Custom exceptions and input validation
 ```
 
 ---
 
-## 3. Environment Setup & Execution
+## 3. Environment setup and execution
 
 ### Prerequisites
-- Python 3.13 or 3.14
-- Conda package manager
+Python 3.13 or 3.14 with the Conda package manager.
 
-### Activating the `oop2` Conda Environment
-To use the pre-configured environment:
+### Activating the `oop2` conda environment
+To activate the environment:
 ```powershell
 conda activate oop2
 ```
-If recreating the environment from scratch:
+To recreate the environment:
 ```powershell
 conda env create -f environment.yml
 conda activate oop2
 ```
 
-### Running Automated Tests
-Run the entire 61-test test suite via pytest:
+### Running automated tests
+Run the 61-test suite with pytest:
 ```powershell
 pytest
 ```
-All 61 tests (including unit, boundary, and Hypothesis property-based tests) pass cleanly without errors.
+All unit, boundary, and property-based tests pass.
 
-### Running the Jupyter Notebook
+### Running the Jupyter notebook
 Launch Jupyter:
 ```powershell
 jupyter notebook project2_uganda_tax_engine.ipynb
 ```
-Select the **oop2** kernel. The notebook is deterministic and reproducible (`np.random.default_rng(42)`) and executes from start to finish via **Kernel -> Restart & Run All** with zero errors.
+Select the `oop2` kernel. The notebook contains a fixed random seed (`np.random.default_rng(42)`) and executes from start to finish via Kernel -> Restart & Run All without errors.
 
 ---
 
-## 4. Software Architecture & OOP Design
+## 4. Software architecture and object-oriented design
 
-### Mandatory Design Constraints
+### Mandatory design constraints
 
-#### 1. The `Money` Value Object (`src/tax_engine/money.py`)
-- **Strictly rejects `float`**: Passing float values to `Money()` or attempting arithmetic with floats raises explicit `TypeError`s to eliminate binary representation drift.
-- **Pure `Decimal` arithmetic**: Amounts are quantized internally using `decimal.ROUND_HALF_UP`.
-- **Value Object Immutability**: Protected with `__slots__` and overriding `__setattr__` / `__delattr__`.
-- **Operator Overloading**: Implements `__add__`, `__sub__`, `__mul__`, `__truediv__`, `__lt__`, `__le__`, `__gt__`, `__ge__`, `__eq__`, `__ne__`, `__repr__`, `__str__`, `__neg__`, and `__bool__`. Division of `Money / Money` correctly returns a dimensionless `Decimal` ratio.
+The `Money` class in `src/tax_engine/money.py` represents monetary values in Ugandan Shillings (UGX). It wraps `decimal.Decimal` with explicit `ROUND_HALF_UP` rounding. Floating-point numbers are rejected during instantiation and arithmetic operations to prevent binary representation drift. Immutability is enforced using `__slots__` and frozen attribute setters. Operator overloading covers addition, subtraction, multiplication, division, and comparisons. Division of two `Money` instances returns a dimensionless `Decimal` ratio.
 
-#### 2. Abstract Base Class `Tax` (`src/tax_engine/base.py`)
-- Enforces the abstract contract:
-  ```python
-  class Tax(ABC):
-      @abstractmethod
-      def calculate(self, ctx: TaxContext) -> TaxResult:
-          ...
-  ```
-- Subclasses: `PAYETax`, `VATModule`, `CorporateIncomeTax`, `WithholdingTax`, and `RentalIncomeTax`.
-- Conforms to the **Liskov Substitution Principle (LSP)**: Any consumer can invoke `.calculate(ctx)` polymorphically.
+The abstract base class `Tax` in `src/tax_engine/base.py` defines the calculation interface:
+```python
+class Tax(ABC):
+    @abstractmethod
+    def calculate(self, ctx: TaxContext) -> TaxResult:
+        ...
+```
+Concrete subclasses include `PAYETax`, `VATModule`, `CorporateIncomeTax`, `WithholdingTax`, and `RentalIncomeTax`. Each subclass adheres to the Liskov Substitution Principle and supports polymorphic evaluation across tax types.
 
-#### 3. Custom Exception Hierarchy (`src/tax_engine/exceptions.py`)
-- Base class: `TaxError(Exception)`.
-- Domain exceptions:
-  - `InvalidIncomeError`: Raised on negative or unparseable monetary quantities.
-  - `NoScheduleForDateError`: Raised when tax date is outside supported statutory years.
-  - `CurrencyMismatchError`: Raised when attempting operations between incompatible currencies.
-  - `NegativeValueError`: Raised when non-negative amounts are violated.
-  - `InvalidSupplyTypeError`: Raised when supply categories are malformed.
-  - `TaxValidationError`: Raised on illegal parameter configurations.
-- **Never fails silently**: All edge cases, invalid dates, and negative amounts raise explicit domain errors.
+The exception hierarchy in `src/tax_engine/exceptions.py` roots in `TaxError(Exception)`. Domain-specific subclasses include `InvalidIncomeError`, `NoScheduleForDateError`, `CurrencyMismatchError`, `NegativeValueError`, `InvalidSupplyTypeError`, and `TaxValidationError`. The engine raises explicit exceptions on invalid inputs and unsupported schedules without silent failure.
 
 ---
 
-## 5. Payroll Pipeline: Deduction Hierarchy & Justification
+## 5. Payroll pipeline: deduction hierarchy and justification
 
-The pipeline implements the following deduction ordering:
+The payroll pipeline applies deductions in the following sequence:
 
 ```
 [Basic Salary + Cash Allowances]
@@ -142,71 +116,79 @@ The pipeline implements the following deduction ordering:
                ▼
        Gross Employment Pay
                │
-               ├─► Pre-Tax Deduction: Local Service Tax (LST)
-               │   (Justification: Allowed under Local Governments Act / URA practice notes)
+               ├─► Pre-tax deduction: Local Service Tax (LST)
+               │   (Justification: Allowed under Local Governments Act and URA guidelines)
                ▼
       Taxable PAYE Base = max(0, Gross - LST)
                │
-               ├─► Statutory Progressive Calculation: PAYE Tax
-               │   (Resident or Non-Resident bands + 10% surcharge)
+               ├─► Progressive calculation: PAYE Tax
+               │   (Resident or non-resident bands plus 10% surcharge)
                │
-               ├─► Statutory Employee Pension: Employee NSSF (5% of Gross)
-               │   (Justification: Computed on gross pay under NSSF Act; non-exempt for private PAYE)
+               ├─► Employee retirement contribution: Employee NSSF (5% of Gross)
+               │   (Justification: Computed on gross pay under NSSF Act; non-exempt for PAYE)
                ▼
      Net Take-Home Pay = Gross - Employee NSSF - LST - PAYE
 ```
-**Employer Liability (Cost to Company - CTC)**:
-- $\text{Employer NSSF (10%)} = \text{Gross} \times 10\%$
-- $\text{Total CTC} = \text{Gross} + \text{Employer NSSF}$
+
+Employer cost to company (CTC) adds the statutory 10% employer NSSF contribution to gross pay:
+$$\text{Total CTC} = \text{Gross} + \text{Employer NSSF}$$
 
 ---
 
-## 6. Testing Strategy & Rubric Verification
+## 6. Testing strategy and verification
 
-### Boundary Tests at Band Edges (`tests/test_paye_boundaries.py`)
-Verified at all required threshold transitions:
-- **UGX 335,000**: Resident Tax = Nil; Non-Resident Tax = UGX 33,500.00.
-- **UGX 335,001**: Resident Tax = UGX 0.20 (20% marginal tier begins); Non-Resident = UGX 33,500.20.
-- **UGX 410,000**: Resident Tax = UGX 15,000.00; Non-Resident = UGX 48,500.00.
-- **UGX 485,000**: Resident Tax = UGX 33,750.00; Non-Resident = UGX 67,250.00.
-- **UGX 10,000,000**: Resident Tax = UGX 2,888,250.00; Non-Resident = UGX 2,921,750.00.
-- **UGX 10,000,001**: Resident Tax = UGX 2,888,250.40 (40% marginal rate begins); Non-Resident = UGX 2,921,750.40.
+### Boundary tests at band edges
+The test suite in `tests/test_paye_boundaries.py` evaluates every statutory band edge:
+- 335,000 UGX: Resident tax is nil; non-resident tax is UGX 33,500.00.
+- 335,001 UGX: Resident tax is UGX 0.20; non-resident tax is UGX 33,500.20.
+- 410,000 UGX: Resident tax is UGX 15,000.00; non-resident tax is UGX 48,500.00.
+- 485,000 UGX: Resident tax is UGX 33,750.00; non-resident tax is UGX 67,250.00.
+- 10,000,000 UGX: Resident tax is UGX 2,888,250.00; non-resident tax is UGX 2,921,750.00.
+- 10,000,001 UGX: Resident tax is UGX 2,888,250.40; non-resident tax is UGX 2,921,750.40.
 
-### Hypothesis Property-Based Testing (`tests/test_hypothesis_properties.py`)
-1. **Non-negativity**: $\forall x \ge 0, \text{tax}(x) \ge 0$.
-2. **Monotonicity**: $x_1 \le x_2 \implies \text{tax}(x_1) \le \text{tax}(x_2)$.
-3. **Upper Bound**: $\forall x \ge 0, \text{tax}(x) \le x$.
-4. **Residency Dominance**: $\forall x \ge 0, \text{tax}_{\text{non-res}}(x) \ge \text{tax}_{\text{res}}(x)$.
-5. **Take-Home Monotonicity**: $x_1 \le x_2 \implies (x_1 - \text{tax}(x_1)) \le (x_2 - \text{tax}(x_2))$ (no 100%+ marginal cliff).
-
----
-
-## 7. Discussion Questions & Analysis
-
-### Q1: Why is `float` unsafe for tax computation?
-Binary floating-point numbers represent values using powers of two ($2^{-n}$), which cannot exactly represent base-10 decimals like $0.1$ or $0.2$. In tax systems, this produces:
-1. **Threshold Discrepancies**: In floats, `335000.10 + 0.20 > 335000.30` evaluates to `True` due to representation error ($335000.300000000035$), erroneously classifying a taxpayer into a higher tax bracket.
-2. **Cumulative Financial Drift**: Reconciling 100,000 invoice line items or employee payroll records causes rounding truncation that accumulates into substantial financial drift, failing statutory URA audits.
-3. **Non-deterministic Rounding**: Floats default to round-half-to-even without explicit rounding control, violating legal rounding conventions (such as `ROUND_HALF_UP`).
-
-### Q2: Where was inheritance justified, and where was it deliberately avoided?
-- **Justified**:
-  - `Tax(ABC)` base class: Polymorphic calculate contract adhered to by `PAYETax`, `VATModule`, `CorporateIncomeTax`, `WithholdingTax`, and `RentalIncomeTax`. Satisfies LSP.
-  - `TaxError(Exception)` hierarchy: Enables clean domain exception filtering.
-- **Deliberately Avoided**:
-  - `Money` does **not** inherit from `Decimal`. It encapsulates `Decimal` via composition and slots to prevent unwanted mathematical methods (e.g. `sqrt`, `exp`) and maintain strict currency and float guards.
-  - `PayrollPipeline` does **not** inherit from `Tax`. A payroll system is an orchestration workflow composing multiple taxes and deductions, not a tax itself.
+### Property-based testing with hypothesis
+Tests in `tests/test_hypothesis_properties.py` evaluate domain properties across randomized income inputs:
+1. Non-negativity: tax liability is non-negative for all non-negative incomes.
+2. Monotonicity: higher income never produces lower tax liability.
+3. Upper bound: tax liability does not exceed gross income.
+4. Residency dominance: non-resident tax liability is greater than or equal to resident tax liability.
+5. Take-home monotonicity: net take-home pay increases monotonically with gross pay.
 
 ---
 
-## 8. Academic Integrity & AI Declaration
+## 7. Discussion questions and analysis
 
-In accordance with course academic integrity regulations, this project was developed with assistance from the AI coding assistant **Antigravity** (Google DeepMind).
+### Question 1: why float is unsafe for tax computation
+Binary floating-point numbers represent values using powers of two, which cannot represent base-10 decimals like 0.1 or 0.2 exactly. In tax calculation software, this causes three problems:
+1. Comparison operations fail at statutory thresholds. The expression `335000.10 + 0.20 > 335000.30` evaluates to `True` in Python floats. This pushes income into a higher tax bracket.
+2. Micro-transaction rounding errors accumulate over large transaction volumes and produce financial audit discrepancies.
+3. Floating-point numbers lack deterministic control over regulatory rounding conventions, such as `ROUND_HALF_UP`.
 
-### Scope of AI Assistance
-- **Domain Modeling & Scaffolding**: Drafting initial class signatures and docstrings based on the URA regulatory baseline.
-- **Test Generation**: Assisting with boundary test matrices and Hypothesis property strategies.
-- **Visualization Scripts**: Structuring multi-panel Matplotlib figures with proper axis labels and formatting.
+### Question 2: where inheritance was applied and where it was avoided
+Inheritance was applied for the abstract base class `Tax` and the `TaxError` exception hierarchy. Subclasses share a polymorphic interface that satisfies the Liskov Substitution Principle.
 
-All regulatory rules, mathematical formulas, and code logic were reviewed, validated against official URA statutory documents, and verified through an automated 61-test suite. The author is fully prepared to explain and defend every component of the code during the viva examination.
+Composition replaces inheritance for `Money`, which encapsulates `decimal.Decimal`. Encapsulation prevents non-monetary operations such as square roots and powers from executing on currency amounts. `PayrollPipeline` coordinates taxes through composition because it represents an organizational workflow.
 
+---
+
+## 8. Academic integrity and AI declaration
+
+This project was developed with assistance from the AI coding assistant Antigravity (Google DeepMind).
+
+Assistance covered:
+- Drafting initial class structures and docstrings based on URA statutory documentation.
+- Generating boundary test matrices and Hypothesis property strategies.
+- Writing Matplotlib visualization scripts with labeled axes and formatting.
+
+Engine calculations and object designs were checked against URA tax guides and verified using the automated test suite.
+
+---
+
+## 9. References
+
+- *Income Tax Act* ([ULII Consolidated Legislation](https://media.ulii.org/media/legislation/112811/source_file/8eca548c5c6cd9f3/1997-11.pdf)).
+- *Value Added Tax Act* ([ULII Consolidated Legislation](https://media.ulii.org/media/legislation/131171/source_file/de3dd76b1715d7a8/1996-8.pdf)). 
+- *National Social Security Fund Act* ([ULII Consolidated Legislation](https://media.ulii.org/media/legislation/114231/source_file/686f9825c32ceb60/1985-8.pdf)).
+- *Local Governments Act* ([ULII Act Archive](https://media.ulii.org/media/legislation/120257/source_file/2652f3b466854bcd/1997-5.pdf)).
+- *Uganda Revenue Authority Act* ([ULII Consolidated Legislation](https://media.ulii.org/media/legislation/18776/source_file/c791ddbca546ff6a/1991-6.pdf)).
+- *Uganda Revenue Authority Tax Guides and Circulars* ([URA Official Portal](https://ura.go.ug/en/tax-education/)).
